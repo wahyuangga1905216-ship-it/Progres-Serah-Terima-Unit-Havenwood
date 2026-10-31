@@ -427,25 +427,15 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
 .hero-main{min-width:0}
 .hero h2{font-size:28px;letter-spacing:-.4px}
 .hero-ring{position:relative;display:grid;place-items:center;padding:14px;margin-right:6px}
-.hero-ring:before{content:"";position:absolute;inset:0;border-radius:50%;border:2px dashed rgba(255,255,255,.35);animation:heroSpin 32s linear infinite;filter:none;background:none;width:auto;height:auto;right:auto;top:auto}
-.hero-ring:after{content:"";position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(255,255,255,.55) 92%,transparent);-webkit-mask:radial-gradient(circle,transparent 62%,#000 63%,#000 66%,transparent 67%);mask:radial-gradient(circle,transparent 62%,#000 63%,#000 66%,transparent 67%);animation:heroSpin 6s linear infinite;left:auto;bottom:auto;width:auto;height:auto;filter:none}
 @keyframes heroSpin{to{transform:rotate(360deg)}}
 .hero .rtr{stroke:rgba(255,255,255,.2)}
 .hero .rnum{color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.2)}
 .hero .rlab small{color:rgba(255,255,255,.8)}
-.glass div{display:grid;grid-template-columns:40px 1fr;column-gap:11px;align-items:center;padding:12px 14px}
-.glass .gi{grid-row:1/3;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.18);display:grid;place-items:center;font-style:normal;font-size:19px}
-.glass span{grid-column:2;font-size:12px}
-.glass b{grid-column:2;margin:0;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
-.live{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:99px;padding:4px 11px;margin-bottom:10px}
-.live i{width:7px;height:7px;border-radius:50%;background:#6ee7b7;animation:syncPulse 2s infinite}
 
 /* kartu status */
 .card.stat{position:relative;padding:16px 18px;border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(135deg,color-mix(in srgb,var(--sc,#10b981) 60%,transparent),transparent 62%) border-box}
 .card.stat[data-k=done]{--sc:#16a34a}.card.stat[data-k=run]{--sc:#f59e0b}.card.stat[data-k=new]{--sc:#64748b}.card.stat[data-k=late]{--sc:#ef4444}
-.card.stat:after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--sc) 20%,transparent),transparent 68%);pointer-events:none}
 .st-top{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13px;color:var(--tx2)}
-.st-ico{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:color-mix(in srgb,var(--sc) 16%,transparent)}
 .st-body{display:flex;align-items:center;gap:14px;margin-top:12px}
 .stat .st-n{font-size:36px;line-height:1;display:block;margin:0;color:var(--tx);font-variant-numeric:tabular-nums}
 .stat .st-txt span{display:block;color:var(--tx2);font-size:12px;margin-top:5px}
@@ -477,6 +467,20 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
 @media(max-width:900px){.banner.hero{grid-template-columns:1fr}.hero-ring{justify-self:center;order:-1}.grid2{grid-template-columns:1fr}}
 @media(max-width:560px){.glass{grid-template-columns:1fr 1fr}.glass div{grid-template-columns:34px 1fr;padding:10px}.glass .gi{width:34px;height:34px}.glass b{font-size:22px}.st-body{gap:10px}}
 @media(prefers-reduced-motion:reduce){.hero-ring:before,.hero-ring:after,.ring.full .rva,.live i,.sync-pill i{animation:none!important}}
+
+/* ---- revisi tampilan: tanpa emoji, tanpa info ganda ---- */
+.hero-ring{position:relative;display:grid;place-items:center;padding:6px 14px 6px 6px}
+.hstats{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.hstats div{min-width:128px;padding:12px 18px;border-radius:16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+.hstats span{display:block;font-size:12px;opacity:.85;font-weight:600}
+.hstats b{display:block;font-size:28px;line-height:1.15;margin-top:4px;font-variant-numeric:tabular-nums}
+.hero p{margin-bottom:20px}
+.st-top{font-size:14px;color:var(--tx);font-weight:700;letter-spacing:.1px}
+.st-body{margin-top:14px}
+.rnum{white-space:nowrap}
+.card.stat[data-k=done] .st-top{color:#15803d}.card.stat[data-k=run] .st-top{color:#b45309}.card.stat[data-k=new] .st-top{color:#475569}.card.stat[data-k=late] .st-top{color:#b91c1c}
+.cbtn{font-size:11px;font-weight:700}
+@media(max-width:560px){.hstats div{min-width:0;flex:1;padding:10px 12px}.hstats b{font-size:22px}}
 </style>
 </head>
 <body>
@@ -527,14 +531,12 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
  <section class="view on" id="dash">
   <div class="banner hero">
    <div class="hero-main">
-    <span class="live"><i></i>Data langsung dari Spreadsheet</span>
     <h2 id="hi">Selamat datang</h2>
     <p>Ringkasan progres pembangunan <b id="bProj"></b> · <span id="bLoc"></span><span id="today"></span></p>
-    <div class="glass">
-     <div data-k=""><i class="gi">🏘️</i><span>Total Unit</span><b id="b1">0</b></div>
-     <div data-k="run"><i class="gi">🛠️</i><span>Sedang Berjalan</span><b id="b2">0</b></div>
-     <div data-k="done"><i class="gi">✅</i><span>Unit Selesai</span><b id="b3">0</b></div>
-     <div data-k="late"><i class="gi">⏰</i><span>Unit Terlambat</span><b id="b4">0</b></div>
+    <div class="hstats">
+     <div><span>Total Unit</span><b id="b1">0</b></div>
+     <div><span>Jumlah Blok</span><b id="b2">0</b></div>
+     <div><span>Tipe Unit</span><b id="b3">0</b></div>
     </div>
    </div>
    <div class="hero-ring" id="heroRing"></div>
@@ -543,7 +545,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
   <div class="card mapcard" id="vbox">
    <div class="mhead">
     <div style="flex:1;min-width:220px">
-     <h3>🗺️ Peta Site Plan</h3>
+     <h3>Peta Site Plan</h3>
      <div class="sub">Mode lihat · klik titik unit untuk detail lengkap · seret untuk menggeser · Ctrl + scroll untuk zoom</div>
     </div>
     <div class="chips" id="vchips">
@@ -553,7 +555,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
      <button class="chip" data-f="new">Belum mulai<b>0</b></button>
      <button class="chip" data-f="late">Terlambat<b>0</b></button>
      <button class="chip on" id="vblk" hidden></button>
-     <button class="chip on" id="vlbl" title="Tampilkan / sembunyikan label info di titik">🏷️ Label</button>
+     <button class="chip on" id="vlbl" title="Tampilkan / sembunyikan label info di titik">Label</button>
     </div>
    </div>
    <div class="map-wrapper" id="vmap">
@@ -565,8 +567,8 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
      <button class="cbtn" id="vzi" title="Perbesar" aria-label="Perbesar">＋</button>
      <button class="cbtn" id="vzo" title="Perkecil" aria-label="Perkecil">－</button>
      <div class="vzl" id="vzl">100%</div>
-     <button class="cbtn" id="vfit" title="Tengahkan" aria-label="Tengahkan">🎯</button>
-     <button class="cbtn" id="vfs" title="Layar penuh" aria-label="Layar penuh">⛶</button>
+     <button class="cbtn" id="vfit" title="Tengahkan" aria-label="Tengahkan">Pas</button>
+     <button class="cbtn" id="vfs" title="Layar penuh" aria-label="Layar penuh">Penuh</button>
     </div>
     <div class="legend">
      <span><i style="background:#f97316"></i>0–30%</span>
@@ -580,7 +582,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
    </div>
   </div>
   <div class="card dash-scurve-card" id="dashSCurveCard">
-   <div class="dash-sc-head"><div><h3>📈 Kurva S Progres Unit</h3><div class="sub">Pilih unit atau klik titik pada peta untuk melihat rencana dan aktual berbobot selama 12 bulan.</div></div><label class="dash-sc-select">Unit<select id="dashScUnit" aria-label="Pilih unit untuk Kurva S dashboard"></select></label></div>
+   <div class="dash-sc-head"><div><h3>Kurva S Progres Unit</h3><div class="sub">Pilih unit atau klik titik pada peta untuk melihat rencana dan aktual berbobot selama 12 bulan.</div></div><label class="dash-sc-select">Unit<select id="dashScUnit" aria-label="Pilih unit untuk Kurva S dashboard"></select></label></div>
    <div class="dash-sc-kpis"><div class="kpi-ring"><div id="dashScRing"></div><div><span>Aktual berbobot</span><b id="dashScActual">0%</b></div></div><div><span>Rencana terakhir</span><b id="dashScPlan">0%</b></div><div><span>Selisih</span><b id="dashScVariance">—</b></div><div><span>Bobot pekerjaan</span><b id="dashScWeight">100%</b></div></div>
    <div class="dash-sc-chart" id="dashScChart"><div class="sub">Memuat Kurva S…</div></div>
    <div class="sc-legend"><span><i style="background:#059669"></i>Rencana kumulatif</span><span><i style="background:#2563eb"></i>Aktual kumulatif</span></div>
@@ -601,9 +603,9 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
       <button class="btn" id="zi" title="Perbesar">＋</button>
       <button class="btn" id="zo" title="Perkecil">－</button>
       <span class="pill" id="zl">100%</span>
-      <button class="btn ghost" id="centerBtn" title="Tengahkan gambar site plan">🎯 Tengahkan</button>
-      <button class="btn ghost" id="ed">✏️ Mode edit titik: mati</button>
-      <button class="btn ghost" id="up">🖼️ Unggah Site Plan</button>
+      <button class="btn ghost" id="centerBtn" title="Tengahkan gambar site plan">Tengahkan</button>
+      <button class="btn ghost" id="ed">Mode edit titik: mati</button>
+      <button class="btn ghost" id="up">Unggah Site Plan</button>
       
       <input type="file" id="fi" accept="image/*,.svg" hidden>
      </div>
@@ -643,7 +645,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
      <tbody id="tb"></tbody>
     </table>
    </div>
-   <div class="hint"><b>Download tersedia di setiap baris unit:</b> klik “⬇ Site Plan + Kurva S PDF” untuk mengunduh satu PDF berisi site plan, informasi unit, dan Kurva S dari unit pilihan saja.</div>
+   <div class="hint"><b>Download tersedia di setiap baris unit:</b> klik “Site Plan + Kurva S PDF” untuk mengunduh satu PDF berisi site plan, informasi unit, dan Kurva S dari unit pilihan saja.</div>
   </div>
  </section>
 
@@ -662,7 +664,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
    </div>
   </div>
   <details class="card" id="scMasterCard" style="margin-top:14px">
-   <summary>📋 Pekerjaan &amp; bobot · berlaku untuk semua unit</summary>
+   <summary>Pekerjaan &amp; bobot · berlaku untuk semua unit</summary>
    <div class="sub" style="margin-top:8px">Atur <b>pekerjaan dan bobotnya sekali saja</b>, otomatis berlaku untuk seluruh unit. Total bobot harus 100%. Yang tetap diisi per unit: aktual pekerjaan, target rencana kumulatif, dan aktual kumulatif per bulan (kontribusi dihitung otomatis).</div>
    <div id="scMasterList"></div>
    <div class="btns"><button class="btn ghost" id="scMasterAdd">＋ Tambah pekerjaan</button><button class="btn" id="scMasterSave">Simpan pekerjaan &amp; bobot</button><span class="pill" id="scMasterTotal">Total 100%</span><span class="pill" id="scMasterStatus">Belum diubah</span></div>
@@ -711,7 +713,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
     <div style="display:flex;align-items:center;gap:12px">
      <div class="lgbox" id="lgPrev">Belum ada</div>
      <div class="btns" style="margin:0">
-      <button class="btn ghost sm" id="logoUp">🖼️ Unggah Logo</button>
+      <button class="btn ghost sm" id="logoUp">Unggah Logo</button>
       <button class="btn ghost sm" id="logoRm">Hapus</button>
       <input type="file" id="logoF" accept="image/*,.svg" hidden>
      </div>
@@ -720,7 +722,7 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
     <div style="display:flex;align-items:center;gap:12px">
      <div class="lgbox" id="lgLoginPrev">Pakai logo proyek</div>
      <div class="btns" style="margin:0">
-      <button class="btn ghost sm" id="loginLogoUp">🖼️ Unggah Logo</button>
+      <button class="btn ghost sm" id="loginLogoUp">Unggah Logo</button>
       <button class="btn ghost sm" id="loginLogoRm">Hapus</button>
       <input type="file" id="loginLogoF" accept="image/*,.svg" hidden>
      </div>
@@ -745,10 +747,10 @@ body.enter #cards>*{animation:enRise .7s cubic-bezier(.2,.8,.2,1) backwards;anim
    <div class="card">
     <h3>Gambar & Data</h3><div class="sub">Site plan, cadangan, dan pemulihan</div>
     <div class="btns">
-     <button class="btn ghost" id="up2">🖼️ Ganti Gambar Site Plan</button>
+     <button class="btn ghost" id="up2">Ganti Gambar Site Plan</button>
      <button class="btn ghost" id="rmPlan">Hapus Gambar (pakai bawaan)</button>
-     <button class="btn ghost" id="expJson">⬇️ Cadangkan Data (JSON)</button>
-     <button class="btn ghost" id="impBtn">⬆️ Pulihkan dari JSON</button>
+     <button class="btn ghost" id="expJson">Cadangkan Data (JSON)</button>
+     <button class="btn ghost" id="impBtn">Pulihkan dari JSON</button>
      <input type="file" id="impF" accept="application/json,.json" hidden>
     </div>
    </div>
@@ -858,7 +860,7 @@ function scChartMarkup(d,W=700,H=260,anim=false){
 function scSummary(d){const weight=d.tasks.reduce((a,t)=>a+Number(t.weight||0),0),weighted=d.tasks.reduce((a,t)=>a+Number(t.weight||0)*Number(t.actual||0)/100,0);let i=-1;for(let j=11;j>=0;j--)if(d.actual[j]!==''&&d.actual[j]!=null){i=j;break}return {weight,weighted,idx:i,plan:i>=0?Number(d.plan[i])||0:0,actual:i>=0?Number(d.actual[i])||0:null,variance:i>=0?(Number(d.actual[i])||0)-(Number(d.plan[i])||0):null}}
 function dashScFillUnits(){const sel=$('#dashScUnit');if(!sel)return;const old=sel.value;sel.innerHTML=units.map(u=>`<option value="${esc(u.id)}">${esc(u.no)} · ${esc(u.type||'')}</option>`).join('');if(units.some(u=>u.id===old))sel.value=old;else if(vsel&&units.some(u=>u.id===vsel))sel.value=vsel;else if(units.length)sel.value=units[0].id;dashScRender()}
 function dashScRender(unitId){const sel=$('#dashScUnit');if(!sel)return;const id=unitId||sel.value||(units[0]&&units[0].id);if(id&&units.some(u=>u.id===id))sel.value=id;const u=units.find(x=>x.id===sel.value);if(!u){$('#dashScChart').innerHTML='<div class="sub">Belum ada unit untuk ditampilkan.</div>';return}const d=scNormalize(scData[u.id]||scDefault()),z=scSummary(d);$('#dashScActual').textContent=z.weighted.toFixed(1)+'%';$('#dashScPlan').textContent=(z.idx>=0?z.plan:Number(d.plan[0])||0).toFixed(1)+'%';$('#dashScVariance').textContent=z.variance===null?'Belum ada snapshot':(z.variance>0?'+':'')+z.variance.toFixed(1)+' pp';$('#dashScWeight').textContent=z.weight.toFixed(1)+'%';$('#dashScChart').innerHTML=scChartMarkup(d,900,270,true);$('#dashScStatus').textContent=scData[u.id]?'Data Kurva S unit '+u.no+(hasCloud()?' · sinkron dari penyimpanan':' · data lokal'):'Belum ada pengaturan tersimpan untuk unit '+u.no+'; yang tampil adalah contoh awal.'}
-function scDetailMarkup(u){const d=scNormalize(scData[u.id]||scDefault()),z=scSummary(d),latest=z.idx>=0?`Bulan ${z.idx+1}`:'Belum ada snapshot';return `<section class="dsc-section"><h3>📈 Kurva S · ${esc(u.no)}</h3><div class="sub">Rencana vs aktual berbobot selama 12 bulan</div><div class="dsc-kpis"><div><small>Aktual berbobot pekerjaan</small><b>${z.weighted.toFixed(1)}%</b></div><div><small>Snapshot aktual terakhir</small><b>${z.actual===null?'—':z.actual.toFixed(1)+'%'}</b><small>${latest}</small></div><div><small>Selisih snapshot</small><b>${z.variance===null?'—':(z.variance>0?'+':'')+z.variance.toFixed(1)+' pp'}</b></div></div><div class="dsc-chart">${scChartMarkup(d,520,220,true)}</div><div class="sc-legend"><span><i style="background:#059669"></i>Rencana</span><span><i style="background:#2563eb"></i>Aktual</span></div><div class="sub" style="margin-top:7px">Bobot pekerjaan terisi: ${z.weight.toFixed(1)}%. ${scData[u.id]?'Data tersimpan tersedia.':'Belum ada data tersimpan untuk unit ini; grafik menampilkan contoh awal.'}</div><table class="dsc-tasklist"><thead><tr><th>Pekerjaan</th><th>Bobot</th><th>Aktual</th><th>Kontribusi</th></tr></thead><tbody>${d.tasks.map(t=>`<tr><td>${esc(t.name)}</td><td>${Number(t.weight).toFixed(1)}%</td><td>${Number(t.actual).toFixed(0)}%</td><td>${(Number(t.weight)*Number(t.actual)/100).toFixed(1)}%</td></tr>`).join('')}</tbody></table><div class="dfoot"><button class="btn ghost" data-open-scurve="${esc(u.id)}">Kelola Kurva S unit ini ↗</button></div></section>`}
+function scDetailMarkup(u){const d=scNormalize(scData[u.id]||scDefault()),z=scSummary(d),latest=z.idx>=0?`Bulan ${z.idx+1}`:'Belum ada snapshot';return `<section class="dsc-section"><h3>Kurva S · ${esc(u.no)}</h3><div class="sub">Rencana vs aktual berbobot selama 12 bulan</div><div class="dsc-kpis"><div><small>Aktual berbobot pekerjaan</small><b>${z.weighted.toFixed(1)}%</b></div><div><small>Snapshot aktual terakhir</small><b>${z.actual===null?'—':z.actual.toFixed(1)+'%'}</b><small>${latest}</small></div><div><small>Selisih snapshot</small><b>${z.variance===null?'—':(z.variance>0?'+':'')+z.variance.toFixed(1)+' pp'}</b></div></div><div class="dsc-chart">${scChartMarkup(d,520,220,true)}</div><div class="sc-legend"><span><i style="background:#059669"></i>Rencana</span><span><i style="background:#2563eb"></i>Aktual</span></div><div class="sub" style="margin-top:7px">Bobot pekerjaan terisi: ${z.weight.toFixed(1)}%. ${scData[u.id]?'Data tersimpan tersedia.':'Belum ada data tersimpan untuk unit ini; grafik menampilkan contoh awal.'}</div><table class="dsc-tasklist"><thead><tr><th>Pekerjaan</th><th>Bobot</th><th>Aktual</th><th>Kontribusi</th></tr></thead><tbody>${d.tasks.map(t=>`<tr><td>${esc(t.name)}</td><td>${Number(t.weight).toFixed(1)}%</td><td>${Number(t.actual).toFixed(0)}%</td><td>${(Number(t.weight)*Number(t.actual)/100).toFixed(1)}%</td></tr>`).join('')}</tbody></table><div class="dfoot"><button class="btn ghost" data-open-scurve="${esc(u.id)}">Kelola Kurva S unit ini ↗</button></div></section>`}
 
 function scFillUnits(){const sel=$('#scUnit'),old=sel.value;sel.innerHTML=units.map(u=>`<option value="${esc(u.id)}">${esc(u.no)} · ${esc(u.type||'')}</option>`).join('');if(units.some(u=>u.id===old))sel.value=old;else if(units.length)sel.value=units[0].id;}
 let scDirty=new Set(),scMasterIsDirty=false,scAT=0,scAutoQ=false;
@@ -1111,7 +1113,7 @@ async function pullRemote(){
   const ch2=rows?scApplyRows(rows,true):false;
   cloudVersion=String(d.sig||cloudVersion);
   setSync('ok','Tersinkron · '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'}));
-  if(ch||ch2){toast('🔄 Data diperbarui dari Spreadsheet');flashSync()}
+  if(ch||ch2){toast('Data diperbarui dari Spreadsheet');flashSync()}
 }
 async function pollOnce(){
   if(!hasCloud()||!cloudReady||pulling||document.hidden||cloudDirty||cloudBusy)return;
@@ -1138,7 +1140,7 @@ const gradOf=u=>late(u)?RC.late:gradP(u.p);
 const ringMem={};
 function ringHTML(key,pct,o={}){
   const sz=o.size||88,sw=o.sw||8,R=50-sw/2-1,C=2*Math.PI*R,g=o.grad||RC.avg,gid='rg'+String(key).replace(/[^a-z0-9]/gi,'');
-  return `<div class="ring ${o.cls||''}" data-rk="${esc(key)}" data-v="${pct}" data-num="${o.num!==undefined?o.num:''}" data-suf="${o.suf||''}" data-c="${C.toFixed(2)}" style="width:${sz}px;height:${sz}px;--rc:${g[0]};--fs:${Math.round(sz*(o.sub?.2:.26))}px"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${g[1]}"/><stop offset="1" stop-color="${g[0]}"/></linearGradient></defs><circle class="rtr" cx="50" cy="50" r="${R}" style="stroke-width:${sw}"/><circle class="rva" cx="50" cy="50" r="${R}" stroke="url(#${gid})" style="stroke-width:${sw}" stroke-dasharray="${C.toFixed(2)}" stroke-dashoffset="${C.toFixed(2)}" transform="rotate(-90 50 50)"/><g class="rhd"><circle cx="${(50+R).toFixed(2)}" cy="50" r="${(sw/2+.8).toFixed(1)}" fill="#fff" stroke="${g[0]}" stroke-width="1.6"/></g></svg><div class="rlab"><b class="rnum">0${o.suf||''}</b>${o.sub?`<small>${o.sub}</small>`:''}</div></div>`;
+  return `<div class="ring ${o.cls||''}" data-rk="${esc(key)}" data-v="${pct}" data-num="${o.num!==undefined?o.num:''}" data-suf="${o.suf||''}" data-c="${C.toFixed(2)}" style="width:${sz}px;height:${sz}px;--rc:${g[0]};--fs:${Math.round(sz*(o.sub?.19:.235))}px"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${g[1]}"/><stop offset="1" stop-color="${g[0]}"/></linearGradient></defs><circle class="rtr" cx="50" cy="50" r="${R}" style="stroke-width:${sw}"/><circle class="rva" cx="50" cy="50" r="${R}" stroke="url(#${gid})" style="stroke-width:${sw}" stroke-dasharray="${C.toFixed(2)}" stroke-dashoffset="${C.toFixed(2)}" transform="rotate(-90 50 50)"/><g class="rhd"><circle cx="${(50+R).toFixed(2)}" cy="50" r="${(sw/2+.8).toFixed(1)}" fill="#fff" stroke="${g[0]}" stroke-width="1.6"/></g></svg><div class="rlab"><b class="rnum">0${o.suf||''}</b>${o.sub?`<small>${o.sub}</small>`:''}</div></div>`;
 }
 function hydrateRings(root,fresh){
   (root||document).querySelectorAll('.ring[data-rk]').forEach((el,i)=>{
@@ -1159,11 +1161,11 @@ function hydrateRings(root,fresh){
 // ---------- Render ----------
 function render(){
   const n=units.length,avg=n?Math.round(units.reduce((a,u)=>a+u.p,0)/n):0,done=units.filter(u=>u.p>=100).length,lt=units.filter(late).length,run=units.filter(u=>u.p>0&&u.p<100&&!late(u)).length,nst=units.filter(u=>u.p==0&&!late(u)).length;
-  [['#b1',n],['#b2',run+lt],['#b3',done],['#b4',lt]].forEach(([s,v])=>{const e=$(s);e.dataset.cu=v;e.textContent=v+(e.dataset.suf||'')});
+  [['#b1',n],['#b2',new Set(units.map(blockOf)).size],['#b3',types.length]].forEach(([s,v])=>{const e=$(s);e.dataset.cu=v;e.textContent=v+(e.dataset.suf||'')});
   $('#hi').textContent='Selamat datang, '+me;
-  $('#heroRing').innerHTML=ringHTML('hero',avg,{size:158,sw:9,suf:'%',sub:'Rata-rata progres',cls:'hero',grad:['#34d399','#d1fae5']});
-  const C=[['Selesai',done,'Unit 100%','done','✅'],['Sedang dikerjakan',run,'Progres 1–99%','run','🛠️'],['Belum dimulai',nst,'Progres 0%','new','⏳'],['Terlambat',lt,'Lewat tanggal serah terima','late','⏰']];
-  $('#cards').innerHTML=C.map(c=>{const w=n?c[1]/n*100:0;return `<div class="card stat" data-k="${c[3]}"><div class="st-top"><span class="st-ico">${c[4]}</span>${c[0]}</div><div class="st-body">${ringHTML('st'+c[3],Math.round(w),{size:78,sw:11,suf:'%',grad:RC[c[3]]})}<div class="st-txt"><b class="st-n" data-cu="${c[1]}">${c[1]}</b><span>${c[2]}</span><em>dari ${n} unit</em></div></div></div>`}).join('');
+  $('#heroRing').innerHTML=ringHTML('hero',avg,{size:172,sw:9,suf:'%',sub:'Progres rata-rata',cls:'hero',grad:['#34d399','#d1fae5']});
+  const C=[['Selesai',done,'Unit 100%','done'],['Sedang dikerjakan',run,'Progres 1–99%','run'],['Belum dimulai',nst,'Progres 0%','new'],['Terlambat',lt,'Lewat tanggal serah terima','late']];
+  $('#cards').innerHTML=C.map(c=>{const w=n?c[1]/n*100:0;return `<div class="card stat" data-k="${c[3]}"><div class="st-top">${c[0]}</div><div class="st-body">${ringHTML('st'+c[3],Math.round(w),{size:84,sw:11,suf:'%',grad:RC[c[3]]})}<div class="st-txt"><b class="st-n" data-cu="${c[1]}">${c[1]}</b><span>${c[2]}</span><em>dari ${n} unit</em></div></div></div>`}).join('');
   const bl={};units.forEach(u=>{(bl[blockOf(u)]=bl[blockOf(u)]||[]).push(u)});
   $('#blocks').innerHTML=Object.entries(bl).map(([b,a])=>{const m=Math.round(a.reduce((x,y)=>x+y.p,0)/a.length),dn=a.filter(x=>x.p>=100).length;return `<div class="blk" data-b="${esc(b)}">${ringHTML('blk'+b,m,{size:62,sw:11,suf:'%',grad:gradP(m)})}<div class="blk-info"><b>Blok ${esc(b)}</b><span>${a.length} unit · ${dn} selesai</span><div class="seg">${a.map((x,i)=>`<i style="background:${col(x)};animation-delay:${i*25}ms" title="${esc(x.no)} · ${x.p}%"></i>`).join('')}</div></div></div>`}).join('')||'<p class="sub">Belum ada unit. Tambahkan baris di sheet DATA_UNIT atau lewat menu Site Plan.</p>';
   const nx=units.filter(u=>u.p<100).sort((a,b)=>(days(a)??Infinity)-(days(b)??Infinity)).slice(0,5);
@@ -1288,7 +1290,7 @@ function loadPlan(url){
 $('#zi').onclick=()=>camE.zoomAt(map.clientWidth/2,map.clientHeight/2,1.5);
 $('#zo').onclick=()=>camE.zoomAt(map.clientWidth/2,map.clientHeight/2,1/1.5);
 $('#centerBtn').onclick=()=>camE.fit(true);
-$('#ed').onclick=e=>{editMode=!editMode;e.currentTarget.textContent='✏️ Mode edit titik: '+(editMode?'aktif':'mati');e.currentTarget.classList.toggle('on',editMode);map.classList.toggle('edit',editMode)};
+$('#ed').onclick=e=>{editMode=!editMode;e.currentTarget.textContent='Mode edit titik: '+(editMode?'aktif':'mati');e.currentTarget.classList.toggle('on',editMode);map.classList.toggle('edit',editMode)};
 
 // ---------- Dashboard: peta lihat + kartu detail ----------
 let vf={k:'',b:''},vsel=null,popNext=true,tipT=0,cullRaf=0,pins=[];
@@ -1330,7 +1332,7 @@ function cull(){
 function syncChips(){
   const c={'':units.length,done:0,run:0,new:0,late:0};units.forEach(u=>c[stOf(u)]++);
   document.querySelectorAll('#vchips [data-f]').forEach(b=>{b.classList.toggle('on',b.dataset.f===vf.k);b.querySelector('b').textContent=c[b.dataset.f]});
-  const vb=$('#vblk');vb.hidden=!vf.b;vb.textContent='Blok '+vf.b+' ✕';
+  const vb=$('#vblk');vb.hidden=!vf.b;vb.textContent='Blok '+vf.b+' ';
   $('#vlbl').classList.toggle('on',!!S.vlbl);
   document.querySelectorAll('#dash [data-k]').forEach(el=>el.classList.toggle('act',vf.k!==''&&el.dataset.k===vf.k));
   document.querySelectorAll('#dash [data-b]').forEach(el=>el.classList.toggle('act',el.dataset.b===vf.b));
@@ -1371,9 +1373,9 @@ function drawDetail(u){
     <div class="dtop"><span class="dchip">Blok ${esc(blockOf(u))}</span><div style="flex:1"></div>
      <button class="ibtn" data-nav="-1" title="Unit sebelumnya" aria-label="Unit sebelumnya">‹</button>
      <button class="ibtn" data-nav="1" title="Unit berikutnya" aria-label="Unit berikutnya">›</button>
-     <button class="ibtn" data-close title="Tutup (Esc)" aria-label="Tutup">✕</button></div>
+     <button class="ibtn" data-close title="Tutup (Esc)" aria-label="Tutup"></button></div>
     <div class="dno">Unit ${esc(u.no)}</div>
-    <div class="dsub"><span class="dchip">🏠 ${esc(u.type||'Tanpa tipe')}</span><span class="tag ${t[1]}">${t[0]}</span></div>
+    <div class="dsub"><span class="dchip">${esc(u.type||'Tanpa tipe')}</span><span class="tag ${t[1]}">${t[0]}</span></div>
    </div>
    <div class="dbody">
     <div class="dprog">
@@ -1381,22 +1383,22 @@ function drawDetail(u){
      <div style="flex:1;min-width:0"><small>Progres pembangunan</small><div class="stg">${stage(u.p)}</div><div class="bar" style="height:6px;margin:0"><i style="width:0%" data-w="${u.p}"></i></div></div>
     </div>
     <div class="dgrid">
-     <div class="dinfo"><small>📅 Serah Terima Unit</small><b>${my(u,'long')}</b><span>${fullD(u)}</span></div>
-     <div class="dinfo"><small>🧱 Kontraktor</small><b>${esc(u.contractor||'Belum diisi')}</b><span>Pelaksana pekerjaan</span></div>
-     <div class="dinfo"><small>📆 Serah Terima Kontraktor</small><b>${esc(u.contractorDate||'Belum dijadwalkan')}</b><span>Tanggal target serah terima kontraktor</span></div>
-     <div class="dinfo"><small>📄 Tanggal Keluar SPK</small><b>${esc(u.spkDate||'Belum diisi')}</b><span>Tanggal penerbitan SPK</span></div>
-     <div class="dinfo"><small>⏱️ Sisa Waktu</small><b style="${restCol}">${rest}</b><span>${restSub}</span></div>
-     <div class="dinfo"><small>🏠 Opsi Unit</small><b>${esc(u.type||'-')}</b><span>Tipe rumah</span></div>
-     <div class="dinfo"><small>🧱 Blok</small><b>Blok ${esc(blockOf(u))}</b><span>${n} unit di blok ini</span></div>
+     <div class="dinfo"><small>Serah Terima Unit</small><b>${my(u,'long')}</b><span>${fullD(u)}</span></div>
+     <div class="dinfo"><small>Kontraktor</small><b>${esc(u.contractor||'Belum diisi')}</b><span>Pelaksana pekerjaan</span></div>
+     <div class="dinfo"><small>Serah Terima Kontraktor</small><b>${esc(u.contractorDate||'Belum dijadwalkan')}</b><span>Tanggal target serah terima kontraktor</span></div>
+     <div class="dinfo"><small>Tanggal Keluar SPK</small><b>${esc(u.spkDate||'Belum diisi')}</b><span>Tanggal penerbitan SPK</span></div>
+     <div class="dinfo"><small>Sisa Waktu</small><b style="${restCol}">${rest}</b><span>${restSub}</span></div>
+     <div class="dinfo"><small>Opsi Unit</small><b>${esc(u.type||'-')}</b><span>Tipe rumah</span></div>
+     <div class="dinfo"><small>Blok</small><b>Blok ${esc(blockOf(u))}</b><span>${n} unit di blok ini</span></div>
     </div>
     ${u.note?`<div class="dnote"><small>CATATAN QC</small>${esc(u.note)}</div>`:`<div class="dnote none">Tidak ada catatan QC untuk unit ini.</div>`}
     ${scDetailMarkup(u)}
     <section class="photo-section" data-photo-unit="${esc(u.id)}" data-photo-mode="view">
-     <div class="photo-head"><strong>📷 Foto Progres Unit</strong><span class="dchip" data-photo-count>Memuat…</span></div>
+     <div class="photo-head"><strong>Foto Progres Unit</strong><span class="dchip" data-photo-count>Memuat…</span></div>
      <div class="photo-gallery" data-photo-gallery><div class="photo-empty">Memuat riwayat foto…</div></div>
      <div class="photo-status">Riwayat foto dikelola dari menu Site Plan.</div>
     </section>
-    <div class="dfoot"><button class="btn ghost" data-edit>✏️ Edit unit di Site Plan</button></div>
+    <div class="dfoot"><button class="btn ghost" data-edit>Edit unit di Site Plan</button></div>
    </div>`;
   const dc=$('#dcard');dc.scrollTop=0;
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
@@ -1537,7 +1539,7 @@ function drawPanel(){
   if(!u)h='<h3>Detail Unit</h3><p class="sub">Klik titik unit di site plan untuk melihat & mengedit data.</p>';
   else{
     const t=tagOf(u),opts=(types.includes(u.type)?types:[u.type,...types]).map(tp=>`<option value="${esc(tp)}" ${tp===u.type?'selected':''}>${esc(tp||'— tanpa tipe —')}</option>`).join('');
-    h=`<div style="display:flex;align-items:center;gap:8px"><h3 style="margin:0;flex:1">Unit ${esc(u.no)}</h3><span class="tag ${t[1]}">${t[0]}</span><button class="btn ghost sm" id="xPanel">✕</button></div>
+    h=`<div style="display:flex;align-items:center;gap:8px"><h3 style="margin:0;flex:1">Unit ${esc(u.no)}</h3><span class="tag ${t[1]}">${t[0]}</span><button class="btn ghost sm" id="xPanel"></button></div>
     <label>Nomor Unit</label><input id="fNo" value="${esc(u.no)}">
     <label>Tipe Unit</label><select id="fType">${opts}</select>
     <label>Tanggal Serah Terima Unit</label><input type="date" id="fDate" value="${esc(u.date||'')}">
@@ -1549,7 +1551,7 @@ function drawPanel(){
     <div class="bar"><i style="width:${u.p}%"></i></div>
     <label>Catatan QC</label><textarea id="fNote" rows="3">${esc(u.note)}</textarea>
     <section class="photo-section" data-photo-unit="${esc(u.id)}" data-photo-mode="edit">
-     <div class="photo-head"><strong>📷 Riwayat Foto Progres</strong><span class="dchip" data-photo-count>Memuat…</span></div>
+     <div class="photo-head"><strong>Riwayat Foto Progres</strong><span class="dchip" data-photo-count>Memuat…</span></div>
      <div class="photo-tools">
       <div><label for="planPhotoDate">Tanggal foto</label><input id="planPhotoDate" type="date" value="${localISODate()}"></div>
       <div><label for="planPhotoStage">Tahap pekerjaan / progres fasad</label><select id="planPhotoStage"><optgroup label="Dokumentasi fasad per 10%"><option value="Fasad 10%">Fasad 10%</option><option value="Fasad 20%">Fasad 20%</option><option value="Fasad 30%">Fasad 30%</option><option value="Fasad 40%">Fasad 40%</option><option value="Fasad 50%">Fasad 50%</option><option value="Fasad 60%">Fasad 60%</option><option value="Fasad 70%">Fasad 70%</option><option value="Fasad 80%">Fasad 80%</option><option value="Fasad 90%">Fasad 90%</option><option value="Fasad 100%">Fasad 100%</option></optgroup><optgroup label="Tahap pekerjaan"><option value="Persiapan">Persiapan</option><option value="Pondasi">Pondasi</option><option value="Struktur">Struktur</option><option value="Dinding">Dinding</option><option value="Atap">Atap</option><option value="MEP">MEP (listrik/air)</option><option value="Plester & Acian">Plester &amp; Acian</option><option value="Lantai">Lantai</option><option value="Kusen & Pintu">Kusen &amp; Pintu</option><option value="Pengecatan">Pengecatan</option><option value="Finishing">Finishing</option><option value="Serah Terima">Serah Terima</option><option value="Lainnya">Lainnya</option></optgroup></select></div>
@@ -1561,7 +1563,7 @@ function drawPanel(){
     <button class="btn red" id="delBtn" style="margin-top:14px;width:100%">Hapus Unit</button>`;
   }
   h+=`<hr><h3>Tipe Unit</h3><div class="sub">Ubah nama langsung di kolom, tambah atau hapus di sini.</div>`
-   +types.map((t,i)=>`<div class="trow"><input data-ti="${i}" value="${esc(t)}" aria-label="Nama tipe"><span class="cnt">${units.filter(x=>x.type===t).length} unit</span><button class="btn red sm" data-td="${i}" title="Hapus tipe">✕</button></div>`).join('')
+   +types.map((t,i)=>`<div class="trow"><input data-ti="${i}" value="${esc(t)}" aria-label="Nama tipe"><span class="cnt">${units.filter(x=>x.type===t).length} unit</span><button class="btn red sm" data-td="${i}" title="Hapus tipe"></button></div>`).join('')
    +`<div class="trow"><input id="nt" placeholder="Tipe baru, mis. Tipe 72"><button class="btn sm" id="nta">＋ Tambah</button></div>`;
   p.innerHTML=h;
 
@@ -1607,7 +1609,7 @@ function addUnit(x,y){
 // ---------- Tabel (hanya lihat) ----------
 const fUnits=()=>{const f=$('#ft').value,q=$('#q').value.toLowerCase();return units.filter(u=>(!f||(f==='late'&&late(u))||(f==='run'&&u.p<100)||(f==='done'&&u.p>=100))&&(!q||u.no.toLowerCase().includes(q)))};
 function drawTbl(){
-  $('#tb').innerHTML=fUnits().map(u=>`<tr><td><b>${esc(u.no)}</b></td><td>${esc(u.type||'-')}</td><td>${esc(u.date||'-')}</td><td>${esc(u.contractor||'-')}</td><td>${esc(u.contractorDate||'-')}</td><td>${esc(u.spkDate||'-')}</td><td>${days(u)===null?'-':(days(u)<0?'Terlambat '+Math.abs(days(u))+' hari':days(u)+' hari')}</td><td><span class="tag ${tagOf(u)[1]}">${tagOf(u)[0]}</span></td><td><b>${u.p}%</b></td><td>${esc(u.note||'-')}</td><td style="min-width:220px"><button type="button" class="btn ghost unit-pdf" data-pdf-combined="${esc(u.id)}" title="Download PDF Site Plan dan Kurva S untuk unit ${esc(u.no)}" style="font-size:12px;padding:8px 10px;white-space:nowrap">⬇ Site Plan + Kurva S PDF</button></td></tr>`).join('')||'<tr><td colspan="11" style="text-align:center;color:var(--tx2);padding:20px">Tidak ada data unit.</td></tr>';
+  $('#tb').innerHTML=fUnits().map(u=>`<tr><td><b>${esc(u.no)}</b></td><td>${esc(u.type||'-')}</td><td>${esc(u.date||'-')}</td><td>${esc(u.contractor||'-')}</td><td>${esc(u.contractorDate||'-')}</td><td>${esc(u.spkDate||'-')}</td><td>${days(u)===null?'-':(days(u)<0?'Terlambat '+Math.abs(days(u))+' hari':days(u)+' hari')}</td><td><span class="tag ${tagOf(u)[1]}">${tagOf(u)[0]}</span></td><td><b>${u.p}%</b></td><td>${esc(u.note||'-')}</td><td style="min-width:220px"><button type="button" class="btn ghost unit-pdf" data-pdf-combined="${esc(u.id)}" title="Download PDF Site Plan dan Kurva S untuk unit ${esc(u.no)}" style="font-size:12px;padding:8px 10px;white-space:nowrap">Site Plan + Kurva S PDF</button></td></tr>`).join('')||'<tr><td colspan="11" style="text-align:center;color:var(--tx2);padding:20px">Tidak ada data unit.</td></tr>';
 }
 
 // ---------- Ekspor ----------
@@ -1741,7 +1743,7 @@ let logo='',loginLogo='';
 function drawBrand(){
   const nm=S.proj||'Nama Proyek';
   $('#pName').textContent=nm;$('#pLoc').textContent=S.loc||'Site Plan QC';
-  $('#bProj').textContent=nm;$('#bLoc').textContent=S.loc?'📍 '+S.loc+' · ':'';
+  $('#bProj').textContent=nm;$('#bLoc').textContent=S.loc?S.loc+' · ':'';
   document.title=nm+' · Site Plan QC';
   const g=$('#lgImg'),pv=$('#lgPrev');
   if(logo){g.src=logo;g.style.display='block';pv.innerHTML='<img alt="Logo" src="'+logo+'">'}
